@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="Store">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My First WebApp with AngularJs - GemStore</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-controller="StoreController as store" class="container">
+      <div class="row">
+          <center>
+          <h1>Gems Store</h1>
+          <h2>- My first Store in AngularJs -</h2>
+              </center>
+      <div ng-repeat="products in store.products | orderBy: 'price'" class="panel panel-default col-sm-6">
+    <div class="panel panel-body col-sm-4">
+    <h3>{{products.name}}</h3>
+    <h4>{{products.price | currency}}</h4>
+    <p>{{products.description}}</p>
+    <img ng-src="{{products.images[0].full}}" class="img-responsive"/>
+      <button class="btn btn-defalut" ng-show="products.canPurchase">Add to Car</button>
+       </div>
+       <div class="col-sm-8" ng-controller="PanelController as panel">
+           <ul class="nav nav-tabs">
+           <li ng-class="{active:panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+           <li ng-class="{active:panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specifications</a></li>
+           <li ng-class="{active:panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+           </ul>
+           <div class="panel" ng-show="panel.isSelected(1)">
+           <h4>Description</h4>
+           <hr>
+           <p>{{products.description}}</p>
+           </div>
+           <div class="panel" ng-show="panel.isSelected(2)">
+           <h4>Specifications</h4>
+           <hr>
+           <blockquote>{{products.specification}}</blockquote>
+           </div>
+           <div class="panel" ng-show="panel.isSelected(3)">
+           <h4>Reviews</h4>
+           <hr>
+           <blockquote>{{products.reviews}}</blockquote>
+           </div>
+       </div>
+      </div>
+      </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
